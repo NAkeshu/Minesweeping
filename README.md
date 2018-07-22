@@ -11,6 +11,7 @@ python3+tkinter
 + 开始游戏选择简单、中等、困难三个等级的难度（有bug，还不能用）
 + 计算出炸弹周围的数字，并在相应位置绘制出来
 
+![img](https://i.loli.net/2018/07/22/5b543eb520119.png)
 ![img](https://i.loli.net/2018/07/22/5b543c56a1b61.png)
 ![img](https://i.loli.net/2018/07/22/5b543c6d948bf.png)
 ![img](https://i.loli.net/2018/07/22/5b543c8dac270.png)
