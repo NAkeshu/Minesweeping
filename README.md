@@ -15,6 +15,7 @@
 + [ ] 判断游戏结束（胜利、失败）
 + [ ] 点击第一个遮挡后才开始（初始化）游戏（防止第一个就点到炸弹）
 # 截图
+![img](https://i.loli.net/2018/07/22/5b543eb520119.png)
 ![img](https://i.loli.net/2018/07/22/5b543c56a1b61.png)
 ![img](https://i.loli.net/2018/07/22/5b543c6d948bf.png)
 ![easy](https://i.loli.net/2018/07/23/5b55cde270eb8.png)

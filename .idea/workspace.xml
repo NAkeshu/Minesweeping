@@ -4,7 +4,6 @@
     <list default="true" id="1d80c962-32bb-48f2-9e8f-9de904d1df5b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minesweeping.py" beforeDir="false" afterPath="$PROJECT_DIR$/minesweeping.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="minesweeping.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="minesweeping.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/minesweeping.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="936">
+              <caret line="234" lean-forward="true" selection-start-line="234" selection-end-line="234" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#68#286#0" />
@@ -48,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="selecetMode.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="selecetMode.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/selecetMode.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
@@ -234,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532247433188</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="修复并完善难度选择功能，并棋盘的每个小方格上添加遮挡，点击可以清除">
+      <created>1532350944310</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532350944310</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -242,7 +248,7 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32946634" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32868758" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
@@ -275,7 +281,8 @@
     <MESSAGE value="随机位置生成炸弹，并在地图上绘制" />
     <MESSAGE value="进入游戏后通过复选框选择游戏难度" />
     <MESSAGE value="计算出炸弹周围的数字，并在棋盘的相应位置绘制出来" />
-    <option name="LAST_COMMIT_MESSAGE" value="计算出炸弹周围的数字，并在棋盘的相应位置绘制出来" />
+    <MESSAGE value="修复并完善难度选择功能，并棋盘的每个小方格上添加遮挡，点击可以清除" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复并完善难度选择功能，并棋盘的每个小方格上添加遮挡，点击可以清除" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -402,16 +409,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/selecetMode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -421,8 +418,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/minesweeping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="936">
+          <caret line="234" lean-forward="true" selection-start-line="234" selection-end-line="234" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#68#286#0" />
@@ -442,6 +439,16 @@
             <element signature="e#4929#5303#0" />
             <element signature="e#5802#6132#0" />
             <element signature="e#5498#5930#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selecetMode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
