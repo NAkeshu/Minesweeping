@@ -7,7 +7,7 @@ def selectEasyMode():
     MAP_WIDTH = 6
     BOMBS_NUM = 3
 
-    textlabel['text'] = "6x6的地图大小，3个地雷"
+    textlabel['text'] = "已选择：简单难度"
 
 def selectNormalMode():
     global MAP_WIDTH
@@ -15,7 +15,7 @@ def selectNormalMode():
     MAP_WIDTH = 12
     BOMBS_NUM = 24
 
-    textlabel['text'] = "12x12的地图大小，24个地雷"
+    textlabel['text'] = "已选择：中等难度"
 
 def selectHardMode():
     global MAP_WIDTH
@@ -23,10 +23,9 @@ def selectHardMode():
     MAP_WIDTH = 15
     BOMBS_NUM = 75
 
-    textlabel['text'] = "15x15的地图大小，75个雷"
+    textlabel['text'] = "已选择：困难难度"
 
 def determineMode():
-    textlabel['text'] = "确认！MAP_WIDTH="+str(MAP_WIDTH)+", BOMBS_NUM="+str(BOMBS_NUM)
     minesweeping.startGame(MAP_WIDTH, BOMBS_NUM)
 
 

@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.messagebox import *
 import random
 
 class blockCanvas():
@@ -6,6 +7,8 @@ class blockCanvas():
     继承的画布，记录改组件的位置(self.x, self.y)
     """
     def __init__(self, master, x, y):
+        self.clickedNum = 0
+        self.WarningImg = PhotoImage(file="./img/warning.png")
         self.x = x
         self.y = y
         self.canvas = Canvas(master, width=50, height=50, bg="gray")
@@ -67,7 +70,7 @@ def initGameData(n):
     将nxn的游戏棋盘中每个小方格一次按照0～nxn-1的编号排好，
     使得二维的棋盘数据可以通过一维的字典数据结构保存。
     字典的键为方格编号，值为该方格中的数据。
-    其中，0代表空，>0代表炸弹数，-1代表有炸弹。
+    其中，0代表空，>0代表炸弹数，-1代表有炸弹，-2代表遮挡被清除
     :param n:
     :return:
     """
@@ -188,9 +191,8 @@ def drawBlocks(mapcanvas):
         x = 20 + 50*(i % MAP_WIDTH)
         y = 70 + 50*int(i / MAP_WIDTH)
         theBlock = blockCanvas(mapcanvas, x, y)
-        # theBlock = Canvas(mapcanvas, width=50, height=50, bg="gray")
-        # theBlock.place(x=x, y=y, anchor=NW)
         theBlock.canvas.bind("<Button-1>", clickBlock)
+        theBlock.canvas.bind("<Button-3>", rightClickBlock)
         Blocks[str(i)] = theBlock
 
 def clickBlock(event):
@@ -202,8 +204,121 @@ def clickBlock(event):
             x = int((px - 20)/50)
             y = int((py - 70)/50)
             BlockNo = x + y*MAP_WIDTH
-            print(str(BlockNo)+": ("+str(x)+", "+str(y)+")")
-    blockBeClicked.place_forget()
+            isGameFailed(BlockNo)
+            searchEmptyBox(BlockNo)
+            isGameWinned()
+            # print(str(BlockNo)+": ("+str(x)+", "+str(y)+")")
+
+def rightClickBlock(event):
+    blockBeClicked = event.widget
+    for i in range(0, BOX_NUM):
+        if Blocks[str(i)].canvas == blockBeClicked:
+            Blocks[str(i)].clickedNum += 1
+            if Blocks[str(i)].clickedNum % 2 == 1:
+                markBlock(event)
+                Blocks[str(i)].canvas.unbind("<Button-1>")
+            else:
+                deleteMark(event)
+                Blocks[str(i)].canvas.bind("<Button-1>", clickBlock)
+
+def markBlock(event):
+    theBlock = event.widget
+    for i in range(0, BOX_NUM):
+        if Blocks[str(i)].canvas == theBlock:
+            img = Blocks[str(i)].WarningImg
+            theBlock.create_image(0, 0, anchor='nw', image=img)
+
+def deleteMark(event):
+    theBlock = event.widget
+    theBlock.delete(ALL)
+
+def searchEmptyBox(firstBoxNo):
+    """
+    利用广度优先搜索，将周围空白方格上的遮挡清除，
+    遇到数字方格或者棋盘边界停止
+    :param firstBoxNo: 初始方格
+    :return:
+    """
+    global searchList
+    searchList = []
+    searchList.append(firstBoxNo)
+    while searchList:
+        searchTheBox(searchList.pop(0))
+
+def searchTheBox(No):
+    if gameData[str(No)] == 0:
+        if No >= MAP_WIDTH:
+            searchUporUnderBoxs(No-MAP_WIDTH)
+        searchBesideBoxs(No)
+        if No < BOX_NUM-MAP_WIDTH-1:
+            searchUporUnderBoxs(No+MAP_WIDTH)
+    gameData[str(No)] = -2
+    Blocks[str(No)].canvas.place_forget()
+
+def searchUporUnderBoxs(UporDownNo):
+    if UporDownNo % MAP_WIDTH >= 1:
+        if UporDownNo % MAP_WIDTH < MAP_WIDTH - 1:
+            searchList.append(UporDownNo-1)
+            searchList.append(UporDownNo)
+            searchList.append(UporDownNo+1)
+        else:
+            searchList.append(UporDownNo-1)
+            searchList.append(UporDownNo)
+    else:
+        searchList.append(UporDownNo)
+        searchList.append(UporDownNo+1)
+
+def searchBesideBoxs(No):
+    if No % MAP_WIDTH >= 1:
+        if No % MAP_WIDTH < MAP_WIDTH - 1:
+            searchList.append(No-1)
+            searchList.append(No+1)
+        else:
+            searchList.append(No-1)
+    else:
+        searchList.append(No+1)
+
+def isGameFailed(blockNo):
+    """
+    判断游戏是否失败：
+    检测点击的方格下是否是炸弹，如果是，游戏失败；
+    如果不是，游戏继续
+    :param blockNo:
+    :return:
+    """
+    for i in range (0, BOX_NUM):
+        if gameData[str(i)] == -1 and blockNo == i:
+            gameFailed(blockNo)
+            root.destroy()
+
+def isGameWinned():
+    """
+    判断游戏是否胜利：
+    检测所有非炸弹方格上的遮挡是否被清空，如果是，游戏胜利；
+    如果不是，游戏继续
+    :return:
+    """
+    blockClickedNum = 0
+    for i in range(0, BOX_NUM):
+        if gameData[str(i)] == -2:
+            blockClickedNum += 1
+    if blockClickedNum == BOX_NUM - BOMBS_NUM:
+        gameWinned()
+        root.destroy()
+
+def gameFailed(No):
+    for i in range(0, BOX_NUM):
+        if gameData[str(i)] == -1:
+            if i == No:
+                px = Blocks[str(i)].x
+                py = Blocks[str(i)].y
+                gameMap.create_rectangle(px, py, px+50, py+50, fill='red')
+                gameMap.create_image(px, py, anchor='nw', image=BombImg)
+            Blocks[str(i)].canvas.place_forget()
+    showinfo(title="游戏结束！", message="完了，踩到地雷了QwQ")
+
+def gameWinned():
+    showinfo(title="游戏结束！", message="恭喜您把地雷都找到了！")
 
 def startGame(map_width, bombs_num):
     global MAP_WIDTH
@@ -216,6 +331,7 @@ def startGame(map_width, bombs_num):
     frameWidth = MAP_WIDTH*50 + 40
     frameHeight = MAP_WIDTH*50 + 90
 
+    global root
     root = initGameFrame("扫雷雷", frameWidth, frameHeight)
     global gameMap
     gameMap = initMap(root)
