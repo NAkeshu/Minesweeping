@@ -1,6 +1,8 @@
 # 扫雷（python3+tkinter）
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)  
 ~~写着玩的~~
+
+**只有`minesweeping.pn`和`selectMode.py`是有用的，`old_minesweeping.py`是留作纪念的（雾），`Timer.py`还不能用，随缘实现吧……**
 # TO-DO：
 + [x] 生成12x12的网格作为游戏棋盘
 + [x] 随机位置生成12个炸弹
@@ -14,15 +16,16 @@
 + [x] 判断点击方格下的内容（空？数字？炸弹？）
 + [x] 点击遮挡后自动将附近没有炸弹的遮挡一起清除（搜索周围的炸弹）
 + [x] 判断游戏结束（胜利、失败），确认后关闭当前游戏窗口
-+ [ ] 点击第一个遮挡后才开始（初始化）游戏（防止第一个就点到炸弹）
-+ [ ] 优化代码
++ [x] 点击第一个遮挡后才开始（初始化）游戏（防止第一个就点到炸弹）
++ [x] 优化代码
+
+**以下功能随缘吧**
 + [ ] 计时/计步
 + [ ] 添加胜利后的庆祝动画（看心情）
 # 截图
-![selectMode](https://i.loli.net/2018/07/22/5b543c6d948bf.png)
-![easy](https://i.loli.net/2018/07/24/5b573ce12acb3.png)
-![normal](https://i.loli.net/2018/07/24/5b57355b8a5dc.png)
-![hard](https://i.loli.net/2018/07/24/5b5735b8ec43e.png)
-![win](https://i.loli.net/2018/07/24/5b5735ee1f191.png)
-![fail](https://i.loli.net/2018/07/24/5b573c4266669.png)
+![selectMode](https://i.loli.net/2018/07/25/5b5873194b460.png)
+![easy](https://i.loli.net/2018/07/25/5b5872e835060.png)
+![normal](https://i.loli.net/2018/07/25/5b58736499ae3.png)
+![win](https://i.loli.net/2018/07/25/5b58732dc6ab9.png)
+![fail](https://i.loli.net/2018/07/25/5b587348ef813.png)
 ~~另外，真的超级想吐槽一下python的二维数组……非常不习惯~~
