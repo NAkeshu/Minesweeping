@@ -18,14 +18,16 @@
 + [x] 判断游戏结束（胜利、失败），确认后关闭当前游戏窗口
 + [x] 点击第一个遮挡后才开始（初始化）游戏（防止第一个就点到炸弹）
 + [x] 优化代码
++ [x] 记录点击次数
++ [x] 提示未找到（标记）的炸弹数量
 
 **以下功能随缘吧**
-+ [ ] 计时/计步
++ [ ] 计时
 + [ ] 添加胜利后的庆祝动画（看心情）
 # 截图
-![selectMode](https://i.loli.net/2018/07/25/5b5873194b460.png)
-![easy](https://i.loli.net/2018/07/25/5b5872e835060.png)
-![normal](https://i.loli.net/2018/07/25/5b58736499ae3.png)
-![win](https://i.loli.net/2018/07/25/5b58732dc6ab9.png)
-![fail](https://i.loli.net/2018/07/25/5b587348ef813.png)
-~~另外，真的超级想吐槽一下python的二维数组……非常不习惯~~
+![selectMode](https://i.loli.net/2018/07/27/5b5a8ff1dc4e2.png)
+![easy](https://i.loli.net/2018/07/27/5b5a90096f3d6.png)
+![normal](https://i.loli.net/2018/07/27/5b5a903819a41.png)
+![win](https://i.loli.net/2018/07/27/5b5a901d9454c.png)
+![fail](https://i.loli.net/2018/07/27/5b5a90509d31a.png)
+~~另外，真的超级想吐槽一下python的多维数组……非常不习惯~~

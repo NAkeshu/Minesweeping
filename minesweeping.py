@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter.messagebox import *
 import random
-import Timer
+# import Timer
 
 class blockCanvas():
     """
@@ -17,15 +17,17 @@ class blockCanvas():
 
 class minsweeping():
     def __init__(self, map_width, bombs_num):
-        self.clickTime = 0
+        self.clickTimes = 0
         self.MAP_WIDTH = map_width
         self.BOMBS_NUM = bombs_num
+        self.unFindBombsNum = self.BOMBS_NUM
         self.BOX_NUM = map_width*map_width
         self.frameWidth = self.MAP_WIDTH * 30 + 40
         self.frameHeight = self.MAP_WIDTH * 30 + 90
         self.root = self.initGameFrame("扫雷雷", self.frameWidth, self.frameHeight)
         self.gameMap = self.initMap()
-        # self.clickTimeMessage = self.setMessageText(self.gameMap)
+        self.MessageText = {}
+        self.setMessageText()
         self.BombImg = PhotoImage(file="./img/BombMini.png")
         self.gameData = self.initGameData()
         self.Blocks = {}
@@ -64,17 +66,17 @@ class minsweeping():
         map.pack(side=BOTTOM)
         return map
 
-    def setMessageText(self, canvas):
+    def setMessageText(self):
         """
         计步（点击次数）或者计时
         :param frame: 游戏窗口
         :param text: 标题（计步或者计时）
         :return:
         """
-        messageText = canvas.create_text(self.frameWidth - 120, 30)
-        # messageText['text'] = "步数："+str(self.clickTime)
-        # messageText.update()
-        return messageText
+        clickTimesmessage = self.gameMap.create_text(self.frameWidth - 120, 30, text="步数："+str(self.clickTimes))
+        unFindBombsMessage = self.gameMap.create_text(20, 30, anchor='w', text="地雷："+str(self.unFindBombsNum))
+        self.MessageText['clickTimesmessage'] = clickTimesmessage
+        self.MessageText['unFindBombsMessage'] = unFindBombsMessage
 
     def drawDigitsOnSide(self):
         """
@@ -206,13 +208,14 @@ class minsweeping():
 
     def clickBlock(self, event):
         blockBeClicked = event.widget
-        if self.clickTime == 0:
+        if self.clickTimes == 0:
             for i in range(0, self.BOX_NUM):
                 if self.Blocks[str(i)].canvas == blockBeClicked:
                     self.initBombs(i)
                     self.drawBombs()
                     self.countAllDigits()
                     self.drawDigitsAroundBomb()
+        self.updateClickTimes()
         for i in range(0, self.BOX_NUM):
             if self.Blocks[str(i)].canvas == blockBeClicked:
                 px = self.Blocks[str(i)].x
@@ -222,7 +225,6 @@ class minsweeping():
                 BlockNo = x + y * self.MAP_WIDTH
                 self.searchEmptyBox(BlockNo)
                 self.isGameWinned()
-        self.clickTime += 1
 
     def rightClickBlock(self, event):
         blockBeClicked = event.widget
@@ -242,10 +244,24 @@ class minsweeping():
             if self.Blocks[str(i)].canvas == theBlock:
                 img = self.Blocks[str(i)].WarningImg
                 theBlock.create_image(0, 0, anchor='nw', image=img)
+        self.updateUnfindBombsNum(1)
 
     def deleteMark(self, event):
         theBlock = event.widget
         theBlock.delete(ALL)
+        self.updateUnfindBombsNum(-1)
+
+    def updateClickTimes(self):
+        self.clickTimes += 1
+        text = "步数：" + str(self.clickTimes)
+        clickTimesMessage = self.MessageText['clickTimesmessage']
+        self.gameMap.itemconfig(clickTimesMessage, text=text)
+
+    def updateUnfindBombsNum(self, i):
+        self.unFindBombsNum -= i
+        text = "地雷：" + str(self.unFindBombsNum)
+        unFindBombsMessage = self.MessageText['unFindBombsMessage']
+        self.gameMap.itemconfig(unFindBombsMessage, text=text)
 
     def searchEmptyBox(self, firstBoxNo):
         """
